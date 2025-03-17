@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center gap-[clamp(0px,1vw,5px)]">
-        <button
-            class="flex flex-row items-center w-[clamp(0px,80vw,400px)] h-[clamp(0px,15vw,75px)] rounded-full backdrop-blur-[1px] relative active:scale-105 shadow-[0_0_20px_#1b2a7c80]">
+        <button @click="openLink(props.link)"
+            class="flex flex-row cursor-pointer items-center w-[clamp(0px,80vw,400px)] h-[clamp(0px,15vw,75px)] rounded-full backdrop-blur-[1px] relative active:scale-95 shadow-[0_0_20px_#1b2a7c80]">
             <div class="absolute inset-0 rounded-full"
                 :style="{ backgroundImage: `url(${props.gif})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.6 }">
             </div>
@@ -28,7 +28,15 @@ const props = defineProps({
     icon: String,
     text: String,
     titleColor: String,
+    link: String,
 });
+
+function openLink(link) {
+  setTimeout(function () {
+    window.open(link, '_blank');
+  }, 200);
+}
+
 
 const shadowColor = computed(() => {
     return invertColor(props.titleColor);
