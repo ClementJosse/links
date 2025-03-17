@@ -7,7 +7,7 @@
             </div>
             <div class="relative z-10 flex flex-row items-center w-full">
                 <img class="w-[clamp(0px,7vw,35px)] m-[clamp(0px,4vw,20px)]" :src="props.icon">
-                <div class="w-full font-semibold text-center mr-[clamp(0px,7vw,35px)]"
+                <div class="w-full font-semibold text-center mr-[clamp(0px,6vw,30px)]"
                     :style="{ color: '#ffffff', fontSize: 'clamp(0px, 5vw, 25px)', textShadow: `0 0 15px #000000` }">
                     {{ props.title }}
                 </div>
