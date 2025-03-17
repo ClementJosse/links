@@ -4,17 +4,17 @@
     <h3 style="font-size: clamp(0px, 4vw, 20px);" class="rainbow font-normal">Lien de mes projets actuellement en ligne:
     </h3>
     <ButtonLink :title="'Portfolio'" :gif="portfolioGif" :icon="portfolioPng"
-      :text="'Mes expériences, mes projets, mes compétences..'" :titleColor="'#ffffff'"
+      :text="'Mes expériences, mes projets, mes compétences..'"
       :link="'https://portfolio.cjosse.com'" />
-    <ButtonLink :title="'Portfolio'" :gif="portfolioGif" :icon="portfolioPng"
-      :text="'Mes expériences, mes projets, mes compétences..'" :titleColor="'#ffffff'"
-      :link="'https://portfolio.cjosse.com'" />
-    <ButtonLink :title="'Portfolio'" :gif="portfolioGif" :icon="portfolioPng"
-      :text="'Mes expériences, mes projets, mes compétences..'" :titleColor="'#ffffff'"
-      :link="'https://portfolio.cjosse.com'" />
-    <ButtonLink :title="'Portfolio'" :gif="portfolioGif" :icon="portfolioPng"
-      :text="'Mes expériences, mes projets, mes compétences..'" :titleColor="'#ffffff'"
-      :link="'https://portfolio.cjosse.com'" />
+    <ButtonLink :title="'Loups Garous sans cartes'" :gif="loupsgarousGif" :icon="loupsgarousPng"
+      :text="'Jouer au jeu du Loups garou en local sans besoin des cartes.'" 
+      :link="'https://lg.cjosse.com'" />
+    <ButtonLink :title="'Dico Scrabble'" :gif="dicoscrabbleGif" :icon="dicoscrabblePng"
+      :text="'Dictionnaire en ligne ergonomique de l’officiel du Scrabble.' "
+      :link="'https://cjosse.com/dicoscrabble'" />
+    <ButtonLink :title="'Score Scrabble'" :gif="scorescrabbleGif" :icon="scorescrabblePng"
+      :text="'Mémorise les scores et fait des stats de vos parties de Scrabble.' "
+      :link="'https://cjosse.com/scorescrabble'" />
 
 
     <div class="flex flex-row gap-[clamp(0px,10vw,50px)] mb-[clamp(0px,20vw,100px)]">
@@ -55,6 +55,15 @@ import ButtonLink from './components/ButtonLink.vue';
 
 import portfolioGif from './assets/portfolio.gif';
 import portfolioPng from './assets/portfolio.png';
+
+import loupsgarousGif from './assets/loupsgarous.gif';
+import loupsgarousPng from './assets/loupsgarous.png';
+
+import dicoscrabbleGif from './assets/dicoscrabble.gif';
+import dicoscrabblePng from './assets/dicoscrabble.png';
+
+import scorescrabbleGif from './assets/scorescrabble.gif';
+import scorescrabblePng from './assets/scorescrabble.png';
 
 import github from './assets/github.svg';
 import linkedin from './assets/linkedin.svg';
