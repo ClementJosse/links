@@ -11,10 +11,10 @@
       :link="'https://lg.cjosse.com'" />
     <ButtonLink :title="'Dico Scrabble'" :gif="dicoscrabbleGif" :icon="dicoscrabblePng"
       :text="'Dictionnaire en ligne ergonomique de l’officiel du Scrabble.' "
-      :link="'https://cjosse.com/dicoscrabble'" />
+      :link="'https://dicoscrabble.cjosse.com'" />
     <ButtonLink :title="'Score Scrabble'" :gif="scorescrabbleGif" :icon="scorescrabblePng"
       :text="'Mémorise les scores et fait des stats de vos parties de Scrabble.' "
-      :link="'https://cjosse.com/scorescrabble'" />
+      :link="'https://dicoscrabble.cjosse.com'" />
 
 
     <div class="flex flex-row gap-[clamp(0px,10vw,50px)] mb-[clamp(0px,20vw,100px)]">
