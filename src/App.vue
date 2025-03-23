@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center font-medium gap-[clamp(0px,10vw,50px)] mt-[clamp(0px,20vw,100px)]">
-    <h1 style="font-size: clamp(0px, 10vw, 50px);" class="text-white font-bold">cjosse.com</h1>
-    <h3 style="font-size: clamp(0px, 4vw, 20px);" class="rainbow font-normal">Lien de mes projets actuellement en ligne:
+    <CJosseCom/>
+    <h3 style="font-size: clamp(0px, 4vw, 20px); margin: clamp(0,10vw,50px)" class="rainbow font-normal">Lien de mes projets actuellement en ligne:
     </h3>
     <ButtonLink :title="'Portfolio'" :gif="portfolioGif" :icon="portfolioPng"
       :text="'Mes expériences, mes projets, mes compétences..'"
@@ -14,7 +14,7 @@
       :link="'https://dicoscrabble.cjosse.com'" />
     <ButtonLink :title="'Score Scrabble'" :gif="scorescrabbleGif" :icon="scorescrabblePng"
       :text="'Mémorise les scores et fait des stats de vos parties de Scrabble.' "
-      :link="'https://dicoscrabble.cjosse.com'" />
+      :link="'https://scorescrabble.cjosse.com'" />
 
 
     <div class="flex flex-row gap-[clamp(0px,10vw,50px)] mb-[clamp(0px,20vw,100px)]">
@@ -51,6 +51,7 @@
 
 
 <script setup>
+import CJosseCom from './components/CJosseCom.vue';
 import ButtonLink from './components/ButtonLink.vue';
 
 import portfolioGif from './assets/portfolio.gif';
