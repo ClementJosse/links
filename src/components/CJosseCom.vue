@@ -1,18 +1,18 @@
 <template>
-    <div class="flex justify-center ">
-        <button @click="triggerAnimation" class="font-bold active:scale-95 rounded-lg">
+    <div class="flex justify-center overpass-mono">
+        <button @click="triggerAnimation" class="font-bold active:scale-95 rounded-lg cursor-pointer pb-[clamp(0px,8vw,40px)]">
             <div class="flex gap-[clamp(0px,2.5vw,12.5px)]">
                 <template v-for="(letter, index) in letters" :key="index">
-                    <div class="letter-container" style="font-size: clamp(0px, 9vw, 45px);">
+                    <div class="letter-container" style="font-size: clamp(0px, 10vw, 50px);">
                         <div class="letter" :class="{
                             'flipped': isFlipped[index],
                             'sequential-flip': hasCompletedFlip && isInSequence[index]
                         }">
-                            <div class="letter-front"
+                            <div class="letter-front overpass-mono"
                                 :style="hasAnimated ? letterStyles[index] : { color: 'white', textShadow: 'none' }">
                                 {{ letter }}
                             </div>
-                            <div class="letter-back" style="color: white; text-shadow: none;">
+                            <div class="letter-back" style="color: white; font-size: clamp(0px, 8vw, 40px); text-shadow: none;">
                                 ⍟
                             </div>
                         </div>
@@ -141,6 +141,19 @@ const triggerAnimation = () => {
 </script>
 
 <style scoped>
+
+@font-face {
+  font-family: 'Overpass Mono';
+  src: url('@/assets/overpass-mono.bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.overpass-mono {
+  font-family: 'Overpass Mono', monospace;
+  font-weight: bold;
+}
+
 .letter-container {
     display: inline-block;
     perspective: 600px;
@@ -178,3 +191,4 @@ const triggerAnimation = () => {
     transform: rotateY(0deg);
 }
 </style>
+
