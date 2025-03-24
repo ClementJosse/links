@@ -1,6 +1,7 @@
 <template>
-    <div class="flex justify-center overpass-mono">
-        <button @click="triggerAnimation" class="font-bold active:scale-95 rounded-lg cursor-pointer pb-[clamp(0px,8vw,40px)]">
+    <div class="flex flex-col justify-center text-white">
+        <button @click="triggerAnimation"
+            class="font-bold active:scale-95 rounded-lg cursor-pointer pb-[clamp(0px,3vw,15px)] overpass-mono">
             <div class="flex gap-[clamp(0px,2.5vw,12.5px)]">
                 <template v-for="(letter, index) in letters" :key="index">
                     <div class="letter-container" style="font-size: clamp(0px, 10vw, 50px);">
@@ -12,7 +13,8 @@
                                 :style="hasAnimated ? letterStyles[index] : { color: 'white', textShadow: 'none' }">
                                 {{ letter }}
                             </div>
-                            <div class="letter-back" style="color: white; font-size: clamp(0px, 8vw, 40px); text-shadow: none;">
+                            <div class="letter-back"
+                                style="color: white; font-size: clamp(0px, 8vw, 40px); text-shadow: none;">
                                 ⍟
                             </div>
                         </div>
@@ -20,11 +22,19 @@
                 </template>
             </div>
         </button>
+        <div class="text-right overpass-mono text-[#4871C9]" style="font-size: clamp(0px, 2.5vw, 12.5px)">
+            Nombre de tirage:
+            <div class="text-[#8BB0FF]" style="font-size: clamp(0px, 4vw, 20px)">
+                {{ tirage }}
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { getDatabase, ref as dbRef, onValue, update } from 'firebase/database';
 
 // Texte à animer
 const text = "cjosse·com";
@@ -40,6 +50,8 @@ const letterStyles = ref(Array(text.length).fill({
     color: '#FFFFFF',
     textShadow: 'none'
 }));
+
+const tirage = ref('-');
 
 // Couleurs selon la répartition demandée
 const colors = {
@@ -118,6 +130,12 @@ const triggerAnimation = () => {
 
     // Deuxième phase: après un délai, les lettres se retournent séquentiellement
     setTimeout(() => {
+        const database = getDatabase();
+        const rootRef = dbRef(database, '/');
+        
+        // Increment tirage in Firebase and locally
+        update(rootRef, { tirage: tirage.value + 1 });
+
         hasCompletedFlip.value = true;
         // Générer de nouvelles couleurs aléatoires pour chaque lettre
         letterStyles.value = generateRandomColors();
@@ -138,20 +156,30 @@ const triggerAnimation = () => {
         });
     }, 300); // délai avant de commencer la séquence
 };
+
+onMounted(() => {
+    const database = getDatabase();
+    const rootRef = dbRef(database, '/');
+
+    onValue(rootRef, (snapshot) => {
+        // Update local tirage with the value from Firebase
+        tirage.value = snapshot.val()?.tirage || 0;
+    });
+});
+
 </script>
 
 <style scoped>
-
 @font-face {
-  font-family: 'Overpass Mono';
-  src: url('@/assets/overpass-mono.bold.otf') format('opentype');
-  font-weight: bold;
-  font-style: normal;
+    font-family: 'Overpass Mono';
+    src: url('@/assets/overpass-mono.bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
 }
 
 .overpass-mono {
-  font-family: 'Overpass Mono', monospace;
-  font-weight: bold;
+    font-family: 'Overpass Mono', monospace;
+    font-weight: bold;
 }
 
 .letter-container {
@@ -191,4 +219,3 @@ const triggerAnimation = () => {
     transform: rotateY(0deg);
 }
 </style>
-

@@ -1,19 +1,25 @@
 <template>
-  <div class="flex flex-col items-center font-medium gap-[clamp(0px,10vw,50px)] mt-[clamp(0px,20vw,100px)]">
-    <CJosseCom/>
-    <h3 style="font-size: clamp(0px, 4vw, 20px); margin: clamp(0,10vw,50px)" class="rainbow font-normal">Lien de mes projets actuellement en ligne:
+  <div class="flex flex-col items-center font-medium gap-[clamp(0px,10vw,50px)]">
+    <div class="mb-[clamp(0px,4vw,20px)] mt-[clamp(0px,2vw,10px)] overpass-mono text-[#4871C9]"
+      style="font-size: clamp(0px, 2.5vw, 12.5px)">
+      Nombre de visiteur:
+      <div class="flex justify-center text-[#8BB0FF]" style="font-size: clamp(0px, 4vw, 20px)">
+        {{ visiteurs }}
+      </div>
+    </div>
+    <CJosseCom />
+    <h3 style="font-size: clamp(0px, 4vw, 20px); margin: clamp(0,10vw,50px)" class="rainbow font-normal">Lien de mes
+      projets actuellement en ligne:
     </h3>
     <ButtonLink :title="'Portfolio'" :gif="portfolioGif" :icon="portfolioPng"
-      :text="'Mes expériences, mes projets, mes compétences..'"
-      :link="'https://portfolio.cjosse.com'" />
+      :text="'Mes expériences, mes projets, mes compétences..'" :link="'https://portfolio.cjosse.com'" />
     <ButtonLink :title="'Loups Garous sans cartes'" :gif="loupsgarousGif" :icon="loupsgarousPng"
-      :text="'Jouer au jeu du Loups garou en local sans besoin des cartes.'" 
-      :link="'https://lg.cjosse.com'" />
+      :text="'Jouer au jeu du Loups garou en local sans besoin des cartes.'" :link="'https://lg.cjosse.com'" />
     <ButtonLink :title="'Dico Scrabble'" :gif="dicoscrabbleGif" :icon="dicoscrabblePng"
-      :text="'Dictionnaire en ligne ergonomique de l’officiel du Scrabble.' "
+      :text="'Dictionnaire en ligne ergonomique de l’officiel du Scrabble.'"
       :link="'https://dicoscrabble.cjosse.com'" />
     <ButtonLink :title="'Score Scrabble'" :gif="scorescrabbleGif" :icon="scorescrabblePng"
-      :text="'Mémorise les scores et fait des stats de vos parties de Scrabble.' "
+      :text="'Mémorise les scores et fait des stats de vos parties de Scrabble.'"
       :link="'https://scorescrabble.cjosse.com'" />
 
 
@@ -71,7 +77,33 @@ import linkedin from './assets/linkedin.svg';
 import mail from './assets/mail.svg';
 
 import { Clipboard } from "v-clipboard";
-import { ref } from 'vue'; // Importez ref pour créer une variable réactive
+
+import { ref, onMounted } from 'vue';
+import { getDatabase, ref as dbRef, onValue, runTransaction } from 'firebase/database';
+
+const visiteurs = ref('-');
+const isInitialized = ref(false); // Nouveau statut
+
+onMounted(async () => {
+  const database = getDatabase();
+  const visiteursRef = dbRef(database, 'visiteurs');
+
+  // 1. D'abord LIRE la valeur actuelle
+  onValue(visiteursRef, (snapshot) => {
+    if (!isInitialized.value) {
+      visiteurs.value = snapshot.val() ?? 0;
+      isInitialized.value = true;
+
+      // 2. PUIS incrémenter (seulement après avoir reçu la valeur)
+      runTransaction(visiteursRef, (currentValue) => {
+        return (currentValue || 0) + 1;
+      });
+    } else {
+      // Mises à jour ultérieures (si d'autres devices modifient la valeur)
+      visiteurs.value = snapshot.val();
+    }
+  });
+});
 
 // Créez une variable réactive pour l'état du tooltip
 const tooltipVisible = ref(false);
@@ -119,5 +151,17 @@ function openLink(link) {
   100% {
     color: #ff8989;
   }
+}
+
+@font-face {
+  font-family: 'Overpass Mono';
+  src: url('@/assets/overpass-mono.bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.overpass-mono {
+  font-family: 'Overpass Mono', monospace;
+  font-weight: bold;
 }
 </style>
