@@ -22,11 +22,14 @@
                 </template>
             </div>
         </button>
-        <div class="text-right overpass-mono text-[#4871C9]" style="font-size: clamp(0px, 2.5vw, 12.5px)">
-            Nombre de tirage:
+        <div v-if="showTirages" class="text-right overpass-mono text-[#4871C9] h-[clamp(0px,10vw,50px)]" style="font-size: clamp(0px, 2.5vw, 12.5px)">
+            Nombre de tirages:
             <div class="text-[#8BB0FF]" style="font-size: clamp(0px, 4vw, 20px)">
                 {{ tirage }}
             </div>
+        </div>
+        <div v-else class="h-[clamp(0px,10vw,50px)]">
+
         </div>
 
     </div>
@@ -51,6 +54,7 @@ const letterStyles = ref(Array(text.length).fill({
     textShadow: 'none'
 }));
 
+var showTirages = false;
 const tirage = ref('-');
 
 // Couleurs selon la répartition demandée
@@ -110,6 +114,8 @@ const generateRandomColors = () => {
 
 // Animation principale
 const triggerAnimation = () => {
+    showTirages = true;
+
     if (isAnimating.value) return;
     isAnimating.value = true;
 

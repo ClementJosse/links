@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center font-medium gap-[clamp(0px,10vw,50px)]">
     <div class="mb-[clamp(0px,4vw,20px)] mt-[clamp(0px,2vw,10px)] overpass-mono text-[#4871C9]"
       style="font-size: clamp(0px, 2.5vw, 12.5px)">
-      Nombre de visiteur:
+      Nombre de visiteurs:
       <div class="flex justify-center text-[#8BB0FF]" style="font-size: clamp(0px, 4vw, 20px)">
         {{ visiteurs }}
       </div>
