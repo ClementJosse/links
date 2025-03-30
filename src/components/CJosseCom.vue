@@ -22,12 +22,23 @@
                 </template>
             </div>
         </button>
-        <div v-if="showTirages" class="text-right overpass-mono text-[#4871C9] h-[clamp(0px,10vw,50px)]" style="font-size: clamp(0px, 2.5vw, 12.5px)">
-            Nombre de tirages:
-            <div class="text-[#8BB0FF]" style="font-size: clamp(0px, 4vw, 20px)">
-                {{ tirage }}
+        <div class="flex justify-between overpass-mono h-[clamp(0px,10vw,50px)]" v-if="showTirages">
+            <div class="flex justify-between w-[clamp(0px,45vw,225px)]" style="font-size: clamp(0px, 2.5vw, 12.5px)">
+                <span style="color: #FFFFFF;">▧30%</span>
+                <span style="color: #97CDFF;">▧25%</span>
+                <span style="color: #BD87FF;">▧20%</span>
+                <span style="color: #F06463;">▧15%</span>
+                <span style="color: #FFD900;">▧10%</span>
+            </div>
+            <div v-if="showTirages" class="text-right overpass-mono text-[#4871C9] h-[clamp(0px,10vw,50px)]"
+                style="font-size: clamp(0px, 2.5vw, 12.5px)">
+                Nombre de tirages:
+                <div class="text-[#8BB0FF]" style="font-size: clamp(0px, 4vw, 20px)">
+                    {{ tirage }}
+                </div>
             </div>
         </div>
+
         <div v-else class="h-[clamp(0px,10vw,50px)]">
 
         </div>
@@ -59,11 +70,11 @@ const tirage = ref('-');
 
 // Couleurs selon la répartition demandée
 const colors = {
-    '#FFFFFF': 40,    // 40%
-    '#97CDFF': 27.5,  // 27.5%
-    '#BD87FF': 17.5,  // 17.5%
-    '#F06463': 10,    // 10%
-    '#FFD900': 5      // 5%
+    '#FFFFFF': 30,    // 30%
+    '#97CDFF': 25,  // 25%
+    '#BD87FF': 20,  // 20%
+    '#F06463': 15,    // 15%
+    '#FFD900': 10      // 10%
 };
 
 // Intensités et opacités pour chaque couleur
@@ -138,7 +149,7 @@ const triggerAnimation = () => {
     setTimeout(() => {
         const database = getDatabase();
         const rootRef = dbRef(database, '/');
-        
+
         // Increment tirage in Firebase and locally
         update(rootRef, { tirage: tirage.value + 1 });
 
