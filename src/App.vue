@@ -12,15 +12,20 @@
       projets actuellement en ligne:
     </h3>
     <ButtonLink :title="'Portfolio'" :gif="portfolioGif" :icon="portfolioPng"
-      :text="'Mes expériences, mes projets, mes compétences..'" :link="'https://portfolio.cjosse.com'" />
+      :text="'Mes expériences, mes projets, mes compétences..'" :link="'https://portfolio.clemjosse.com'" />
+    
+      <!-- Futur scrabble ici -->
+
     <ButtonLink :title="'Loups Garous sans cartes'" :gif="loupsgarousGif" :icon="loupsgarousPng"
-      :text="'Jouer au jeu du Loups garou en local sans besoin des cartes.'" :link="'https://lg.cjosse.com'" />
+      :text="'Jouer au jeu du Loups garou en local sans besoin des cartes.'" :link="'https://lg.clemjosse.com'" />
+    
+      <!-- Bouton a catégoriser différemment -->
     <ButtonLink :title="'Dico Scrabble'" :gif="dicoscrabbleGif" :icon="dicoscrabblePng"
       :text="'Dictionnaire en ligne ergonomique de l’officiel du Scrabble.'"
-      :link="'https://dicoscrabble.cjosse.com'" />
+      :link="'https://dicoscrabble.clemjosse.com'" />
     <ButtonLink :title="'Score Scrabble'" :gif="scorescrabbleGif" :icon="scorescrabblePng"
       :text="'Mémorise les scores et fait des stats de vos parties de Scrabble.'"
-      :link="'https://scorescrabble.cjosse.com'" />
+      :link="'https://scorescrabble.clemjosse.com'" />
 
 
     <div class="flex flex-row gap-[clamp(0px,10vw,50px)] mb-[clamp(0px,20vw,100px)]">

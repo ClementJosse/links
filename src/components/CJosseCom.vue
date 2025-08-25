@@ -51,7 +51,7 @@ import { ref, computed, onMounted } from 'vue';
 import { getDatabase, ref as dbRef, onValue, update } from 'firebase/database';
 
 // Texte à animer
-const text = "cjosse·com";
+const text = "clemjosse·com";
 const letters = computed(() => text.split(''));
 
 // États pour l'animation
@@ -210,7 +210,7 @@ onMounted(() => {
     display: inline-block;
     transform-style: preserve-3d;
     transition: transform 0.2s;
-    min-width: 1ch;
+    min-width: 0.75ch;
 }
 
 .letter-front,
